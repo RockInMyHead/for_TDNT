@@ -1,0 +1,1045 @@
+{% extends "general_web/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/first.css' %}">
+    <!-- Load plotly.js into the DOM -->
+	  <script src='https://cdn.plot.ly/plotly-2.20.0.min.js'></script>
+    <style type="text/css">
+    #chartdiv {
+      width: 100%;
+      height: 200px;
+    }
+    #chartdiv-2 {
+      width: 100%;
+      height: 200px;
+    }
+    #chartdiv-3{
+      width: 100%;
+      height: 200px;
+    }
+    #chartdiv-4{
+      width: 100%;
+      height: 400px;
+    }
+    #chartdiv-5{
+      width: 100%;
+      height: 400px;
+    }
+    #chartdiv-6{
+      width: 99%;
+      height: 400px;
+    }
+    .index_1{
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .index_2{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  20px 20px 0px #87c0cc,
+                 -20px -20px 0px #b7ffff;
+  }
+  .index_3{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius:50px;
+    background: #9FE2F0;
+    box-shadow:  -20px 20px 0px #87c0cc,
+                 20px -20px 0px #b7ffff;
+  }
+  .index_4{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  20px 20px 0px #87c0cc,
+                 -20px -20px 0px #b7ffff;
+  }
+  .index_5{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  -20px 20px 0px #87c0cc,
+                 20px -20px 0px #b7ffff;
+  }
+  .big_index_1{
+    padding-top: 5%;
+  }
+  .big_index_2{
+    padding-top: 5%;
+  }
+  .big_index_3{
+    padding-top: 5%;
+  }
+  .big_index_4{
+    padding-top: 5%;
+  }
+
+  .air_1 {
+    position: relative;
+    box-shadow: inset 0 0 25px rgba (255, 255, 255, 0.25);
+    animation: animate_4010 8s ease-in-out infinite;
+  }
+  .air_1 :nth-child(2) {
+    position: relative;
+    zoom: 0.45;
+    left: -10px;
+    top: -100px;
+    animation : none
+  }
+  @keyframes animate_4010 {
+    0%,100% {
+      transform: translateY(-20px);
+    }
+  
+    50% {
+      transform: translateY(20px);
+    }
+  }
+  @media (min-width: 312px) and (max-width: 640px) {
+    .diagram2 {
+    font-size: 10px;
+  }
+}
+     </style>
+  </head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+<!--
+<div class="container">
+  <div class="text-container">
+    <div class="col">
+      <h4>Welcome to console,</h4><h2> {{user.username}}</h2>
+    </div>
+</div>
+-->
+<div class="diagram2">
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col">
+        <div class="col">
+        </div>
+      <div class="col">
+        <h1>Количество оставшихся email   </h1> <h2>{{mess.number}}</h2>
+      </div>
+      <div class="col">
+        <h1>Количество отправленных email</h1> <h2>{{mess.sent_number}}</h2>
+      </div>
+      <div class="col">
+      </div>
+      <div id="chartdiv"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row ">
+      <div class="col">
+        <h1>Просмотренные email</h1><h2>{{ mess.open_ip }}</h2>
+        <div id="chartdiv-3"></div>
+      </div>
+      <div class="col">
+        <h1>Успешно доставленные </h1> <h2>{{ mess.successfully }}</h2> <div id="chartdiv-2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="info">
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col">
+          <a class="btn p-3 bg-primary-subtle" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Ip адресса
+          </a>
+        </div>
+        <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <h5> 
+                      {% for item in mess.ip %}
+                      {% if item == "/" %}
+                      <hr>
+                       {% else%}
+                     <p>{{item}}</p> 
+                     {% endif%}
+                     {% endfor %}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="collapse" id="collapseExample2">
+                  <div class="card card-body">
+                    <h5> 
+                      {% for item in mess.country %}
+                      {% if item == "/" %}
+                      <hr>
+                       {% else%}
+                     {{item}} 
+                     {% endif%}
+                     {% endfor %}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col">
+          <a class="btn p-3 bg-primary-subtle" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Местоположение
+          </a>
+        </div>
+      </div>
+    </div>
+<div class="diagram2">
+<div class="container-fluid">
+  <div class="row ">
+    
+    <div class="col">
+      <!--<h1>Динамика открытых email</h1> <div id="chartdiv-6"></div>0-->
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Время</th>
+            <th scope="col">Отправленные email</th>
+            <th scope="col">Успешно доставленные</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+            {% for item in anl.data %}
+              {% if item == "," %}
+              <hr>
+              {% else%}
+                {{item}} 
+              {% endif%}
+            {% endfor %}
+          </td>
+          <td>
+            {% for item in anl.time %}
+            {% if item == "," %}
+            <hr>
+             {% else%}
+             <m>{{item}} <m>
+           
+           {% endif%}
+           {% endfor %}
+          </td>
+          <!--class="table-active"-->
+          <td >
+            {% for item in anl.send_email %}
+            {% if item == "," %}
+            <hr>
+             {% else%}
+             
+           {{item}} 
+           
+           {% endif%}
+           {% endfor %}
+          </td>
+          <td>
+            {% for item in anl.successfully_send_email %}
+            {% if item == "," %}
+            <hr>
+             {% else%}
+             
+           {{item}} 
+           
+           {% endif%}
+           {% endfor %}
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+  <!--
+  <div class="container">
+    <div class="text-container-3">
+      <h5>Рассылка на один email</h5>
+    </div>
+    <div class="text-container-3">
+        <form action="mail/" method="post">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"><h4>Email адрес :</h4></label>
+            {% csrf_token %}
+            <input type="email" class="form-control" type="text" aria-describedby="emailHelp" name="your_name" value="{{ user_mail }}">
+            <hr>
+            <h4>Выберите ваш шаблон :</h4>  
+            {% for entry in topic %}
+                <div class="form-check">
+                  <input type="radio" name="update_type" value="{{ entry.name_file }}">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    {{ entry.name_file|linebreaks }}
+                  </label>
+                </div>
+                {% empty %}
+                <li>Еще нет шаблона, загрузите его!</li>
+                {% endfor %}
+                -->
+            <!--<input type="text" class="form-control" type="text" aria-describedby="emailHelp" name="message" value="{{ user_message }}">-->
+             <!--
+          </div>
+          <button type="submit" class="btn btn-warning"><h4>Отправить</h4></button>
+        </form>
+        </div>
+      </div>
+      <div class="container">
+        <div class="text-container-3">
+          <h5>Рассылка на несколько email</h5>
+        </div>
+        <div class="text-container-3">
+            <form action="mails/" method="post">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"><h4>Email адреса :</h4></label>
+                {% csrf_token %}
+                <input type="text" class="form-control" type="text" aria-describedby="emailHelp" name="your_name" value="{{ user_mail }}">
+                <hr>
+                <h4>Выберите ваш шаблон :</h4>  
+                {% for entry in topic %}
+                    <div class="form-check">
+                      <input type="radio" name="update_type" value="{{ entry.name_file }}">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        {{ entry.name_file|linebreaks }}
+                      </label>
+                    </div>
+                    {% empty %}
+                    <li>Еще нет шаблона, загрузите его!</li>
+                    {% endfor %}
+                  -->
+                <!--<input type="text" class="form-control" type="text" aria-describedby="emailHelp" name="message" value="{{ user_message }}">-->
+               <!--
+              </div>
+              <button type="submit" class="btn btn-warning"><h4>Отправить</h4></button>
+            </form>
+            </div>
+          </div>
+          -->
+<script src="https://rawcdn.githack.com/RockInMyHead/RockInMyHead.github.io/3bc89ccf9d66a2e7b2fdc5b1f50bc370774ae30c/server3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>     
+  
+  <!-- Resources -->
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <!-- Chart code -->
+  <script>
+
+
+am5.ready(function() {
+
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root6 = am5.Root.new("chartdiv-6");
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root6.setThemes([am5themes_Animated.new(root6)]);
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root6.container.children.push(
+  am5xy.XYChart.new(root6, {
+    panX: false,
+    panY: false,
+    wheelX: "panX",
+    wheelY: "zoomX",
+    layout: root6.verticalLayout
+  })
+);
+
+// Add scrollbar
+// https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+
+
+var data = [
+  {
+    year: "Январь",
+    income: 200,
+    expenses: 40
+  },
+  {
+    year: "Февраль",
+    income: 500,
+    expenses: 80
+  },
+  {
+    year: "Март",
+    income: 150,
+    expenses: 140
+  },
+  {
+    year: "Апрель",
+    income: 400,
+    expenses: 50
+  },
+  {
+    year: "Май",
+    income: 400,
+    expenses: 60,
+    strokeSettings: {
+      stroke: chart.get("colors").getIndex(1),
+      strokeWidth: 3,
+      strokeDasharray: [5, 5]
+    }
+  },
+  {
+    year: "Июнь",
+
+  },
+  {
+    year: "Июль",
+
+  },
+  {
+    year: "Август",
+
+  },
+  {
+    year: "Сентябрь",
+
+  },
+  {
+    year: "Октябрь",
+
+  },
+  {
+    year: "Ноябрь",
+
+  },
+  {
+    year: "Декабрь",
+
+  },
+
+
+
+];
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xRenderer = am5xy.AxisRendererX.new(root6, {});
+var xAxis = chart.xAxes.push(
+  am5xy.CategoryAxis.new(root6, {
+    categoryField: "year",
+    renderer: xRenderer,
+    tooltip: am5.Tooltip.new(root6, {})
+  })
+);
+xRenderer.grid.template.setAll({
+  location: 1
+})
+
+xAxis.data.setAll(data);
+
+var yAxis = chart.yAxes.push(
+  am5xy.ValueAxis.new(root6, {
+    min: 0,
+    extraMax: 0.1,
+    renderer: am5xy.AxisRendererY.new(root6, {
+      strokeOpacity: 0.1
+    })
+  })
+);
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+
+var series1 = chart.series.push(
+  am5xy.ColumnSeries.new(root6, {
+    name: "Отправленно",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueYField: "income",
+    categoryXField: "year",
+    tooltip: am5.Tooltip.new(root6, {
+      pointerOrientation: "horizontal",
+      labelText: "{name} : {valueY} {info}"
+    })
+  })
+);
+
+series1.columns.template.setAll({
+  tooltipY: am5.percent(10),
+  templateField: "columnSettings"
+});
+
+series1.data.setAll(data);
+
+var series2 = chart.series.push(
+  am5xy.LineSeries.new(root6, {
+    name: "Открытые",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueYField: "expenses",
+    categoryXField: "year",
+    tooltip: am5.Tooltip.new(root6, {
+      pointerOrientation: "horizontal",
+      labelText: "{name}: {valueY} {info}"
+    })
+  })
+);
+
+series2.strokes.template.setAll({
+  strokeWidth: 3,
+  templateField: "strokeSettings"
+});
+
+
+series2.data.setAll(data);
+
+series2.bullets.push(function() {
+  return am5.Bullet.new(root6, {
+    sprite: am5.Circle.new(root6, {
+      strokeWidth: 3,
+      stroke: series2.get("stroke"),
+      radius: 5,
+      fill: root6.interfaceColors.get("background")
+    })
+  });
+});
+
+chart.set("cursor", am5xy.XYCursor.new(root6, {}));
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+var legend = chart.children.push(
+  am5.Legend.new(root6, {
+    centerX: am5.p50,
+    x: am5.p50
+  })
+);
+legend.data.setAll(chart.series.values);
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+chart.appear(1000, 100);
+series1.appear();
+
+
+}); // end am5.ready()
+
+
+am5.ready(function() {
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root5 = am5.Root.new("chartdiv-5");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root5.setThemes([
+  am5themes_Animated.new(root5)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root5.container.children.push(am5xy.XYChart.new(root5, {
+  panX: true,
+  panY: true,
+  wheelX: "panX",
+  wheelY: "zoomX",
+  pinchZoomX: true
+}));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root5, {}));
+cursor.lineY.set("visible", false);
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xRenderer = am5xy.AxisRendererX.new(root5, { minGridDistance: 30 });
+xRenderer.labels.template.setAll({
+  rotation: -90,
+  centerY: am5.p50,
+  centerX: am5.p100,
+  paddingRight: 15
+});
+
+xRenderer.grid.template.setAll({
+  location: 1
+})
+
+var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root5, {
+  maxDeviation: 0.3,
+  categoryField: "country",
+  renderer: xRenderer,
+  tooltip: am5.Tooltip.new(root5, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root5, {
+  maxDeviation: 0.3,
+  renderer: am5xy.AxisRendererY.new(root5, {
+    strokeOpacity: 0.1
+  })
+}));
+
+
+// Create series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.ColumnSeries.new(root5, {
+  name: "Series 1",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  sequencedInterpolation: true,
+  categoryXField: "country",
+  tooltip: am5.Tooltip.new(root5, {
+    labelText: "{valueY}"
+  })
+}));
+
+series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+series.columns.template.adapters.add("fill", function(fill, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+series.columns.template.adapters.add("stroke", function(stroke, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+
+// Set data
+var data = [{
+  country: "00:00",
+  value: 10
+}, {
+  country: "01:00",
+  value: 2
+}, {
+  country: "02:00",
+  value: 3
+}, {
+  country: "03:00",
+  value: 23
+}, {
+  country: "04:00",
+  value: 2
+}, {
+  country: "05:00",
+  value: 5
+},{
+  country: "06:00",
+  value: 6
+},{
+  country: "07:00",
+  value: 7
+},{
+  country: "08:00",
+  value: 123
+},{
+  country: "09:00",
+  value: 3
+},{
+  country: "10:00",
+  value: 1
+},{
+  country: "11:00",
+  value: 79
+},{
+  country: "12:00",
+  value: 65
+},{
+  country: "13:00",
+  value: 54
+},{
+  country: "14:00",
+  value: 23
+},{
+  country: "15:00",
+  value: 14
+},{
+  country: "16:00",
+  value: 1
+},{
+  country: "17:00",
+  value: 43
+},
+{
+  country: "18:00",
+  value: 54
+},
+{
+  country: "19:00",
+  value: 13
+},
+{
+  country: "20:00",
+  value: 23
+},
+{
+  country: "21:00",
+  value: 129
+},
+{
+  country: "22:00",
+  value: 2
+},
+{
+  country: "23:00",
+  value: 123
+},];
+
+
+
+xAxis.data.setAll(data);
+series.data.setAll(data);
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
+
+});
+
+
+am5.ready(function() {
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root4 = am5.Root.new("chartdiv-4");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root4.setThemes([
+  am5themes_Animated.new(root4)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root4.container.children.push(am5xy.XYChart.new(root4, {
+  panX: true,
+  panY: true,
+  wheelX: "panX",
+  wheelY: "zoomX",
+  pinchZoomX: true
+}));
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root4, {}));
+cursor.lineY.set("visible", false);
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+var xRenderer = am5xy.AxisRendererX.new(root4, { minGridDistance: 30 });
+xRenderer.labels.template.setAll({
+  rotation: -90,
+  centerY: am5.p50,
+  centerX: am5.p100,
+  paddingRight: 15
+});
+
+xRenderer.grid.template.setAll({
+  location: 1
+})
+
+var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root4, {
+  maxDeviation: 0.3,
+  categoryField: "country",
+  renderer: xRenderer,
+  tooltip: am5.Tooltip.new(root4, {})
+}));
+
+var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root4, {
+  maxDeviation: 0.3,
+  renderer: am5xy.AxisRendererY.new(root4, {
+    strokeOpacity: 0.1
+  })
+}));
+
+
+// Create series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+var series = chart.series.push(am5xy.ColumnSeries.new(root4, {
+  name: "Series 1",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "value",
+  sequencedInterpolation: true,
+  categoryXField: "country",
+  tooltip: am5.Tooltip.new(root4, {
+    labelText: "{valueY}"
+  })
+}));
+
+series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+series.columns.template.adapters.add("fill", function(fill, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+series.columns.template.adapters.add("stroke", function(stroke, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+var my_country = {{ mess.open_ip }};
+// Set data
+var data = [{
+  country: my_country,
+  value: 10
+}, {
+  country: "Москва",
+  value: 2
+}, {
+  country: "Волгорад",
+  value: 3
+}, {
+  country: "Омск",
+  value: 23
+}, {
+  country: "Анапа",
+  value: 123
+}, ];
+
+xAxis.data.setAll(data);
+series.data.setAll(data);
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series.appear(1000);
+chart.appear(1000, 100);
+
+});
+
+
+  am5.ready(function F2() {
+var root_3 = am5.Root.new("chartdiv-3");
+root_3.setThemes([
+  am5themes_Animated.new(root_3)
+]);
+var chart = root_3.container.children.push(
+  am5percent.PieChart.new(root_3, {
+    endAngle: 270
+  })
+);
+var series = chart.series.push(
+  am5percent.PieSeries.new(root_3, {
+    valueField: "value",
+    categoryField: "category",
+    endAngle: 270
+  })
+);
+series.states.create("hidden", {
+  endAngle: -90
+});
+series.data.setAll([{
+  category: "Просмотренные",
+  value: {{ mess.open_ip }}
+}, {
+  category: "Не просмотренные",
+  value: {{ mess.successfully }} - {{ mess.open_ip }}
+},]);
+series.appear(2000, 100);
+
+}); 
+
+
+
+
+  am5.ready(function F() {
+var root_2 = am5.Root.new("chartdiv-2");
+root_2.setThemes([
+  am5themes_Animated.new(root_2)
+]);
+var chart = root_2.container.children.push(
+  am5percent.PieChart.new(root_2, {
+    endAngle: 270
+  })
+);
+var series = chart.series.push(
+  am5percent.PieSeries.new(root_2, {
+    valueField: "value",
+    categoryField: "category",
+    endAngle: 270
+  })
+);
+series.states.create("hidden", {
+  endAngle: -90
+});
+series.data.setAll([{
+  category: "Успешно доставленные",
+  value: {{ mess.successfully }}
+}, {
+  category: "Недоставленные",
+  value: {{mess.sent_number}} - {{ mess.successfully }} 
+},]);
+series.appear(2000, 100);
+
+}); 
+
+
+
+
+
+  am5.ready(function() {
+  var root = am5.Root.new("chartdiv");
+  root.setThemes([
+    am5themes_Animated.new(root)
+  ]);
+  var chart = root.container.children.push(am5xy.XYChart.new(root, {
+    panX: false,
+    panY: false,
+    wheelX: "none",
+    wheelY: "none",
+    layout: root.verticalLayout
+  }));
+  var data = [{
+    category: "",
+    open: 1,
+    close: {{mess.number}},
+    average: {{mess.sent_number}},
+  }];
+  var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+    categoryField: "category",
+    renderer: am5xy.AxisRendererY.new(root, {
+      cellStartLocation: 0.1,
+      cellEndLocation: 0.9
+    }),
+    tooltip: am5.Tooltip.new(root, {})
+  }));
+  yAxis.data.setAll(data);
+  var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+    renderer: am5xy.AxisRendererX.new(root, {
+      minGridDistance: 40
+    })
+  }));
+  xAxis.get("renderer").grid.template.set("visible", false);
+  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+    xAxis: xAxis,
+    yAxis: yAxis,
+    openValueXField: "open",
+    valueXField: "close",
+    categoryYField: "category",
+    fill: am5.color(0x888888)
+  }));
+  series.columns.template.setAll({
+    height: 5
+  });
+  series.data.setAll(data);
+  series.bullets.push(function () {
+    return am5.Bullet.new(root, {
+      locationX: 0,
+      sprite: am5.Circle.new(root, {
+        fill: am5.color('#536FAE'),
+        radius: 10
+      })
+    });
+  });
+  series.bullets.push(function () {
+    return am5.Bullet.new(root, {
+      locationX: 1,
+      sprite: am5.Circle.new(root, {
+        fill: am5.color('#536FAE'),
+        radius: 10
+      })
+    });
+  });
+  
+  
+  var series2 = chart.series.push(am5xy.LineSeries.new(root, {
+    name: "Отправленные email",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueXField: "average",
+    categoryYField: "category"
+  }));
+  
+  series2.strokes.template.setAll({
+    visible: false
+  });
+  
+  series2.data.setAll(data);
+  
+  // Add bullets
+  series2.bullets.push(function () {
+    return am5.Bullet.new(root, {
+      sprite: am5.Triangle.new(root, {
+        fill: am5.color(0x70b603),
+        rotation: 180,
+        width: 24,
+        height: 24
+      })
+    });
+  });
+  
+  
+  var series3 = chart.series.push(am5xy.LineSeries.new(root, {
+    name: "",
+    xAxis: xAxis,
+    yAxis: yAxis,
+    // valueXField: "average",
+    // categoryYField: "category"
+  }));
+  
+  series3.strokes.template.setAll({
+    visible: false
+  });
+  
+  series3.data.setAll(data);
+  
+  // Add legend
+  var legend = chart.children.push(am5.Legend.new(root, {
+    layout: root.horizontalLayout,
+    clickTarget: "none"
+  }));
+  
+  legend.data.setAll([series3, series2]);
+  
+  
+  // Make stuff animate on load
+  // https://www.amcharts.com/docs/v5/concepts/animations/
+  series.appear();
+  chart.appear(1000, 100);
+  
+  });
+  </script>
+  <!-- Styles -->
+
+{% endblock content %}
+
+</body>
+</html>
+
