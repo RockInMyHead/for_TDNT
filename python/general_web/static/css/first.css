@@ -1,0 +1,259 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    background-color: #49cacc;
+  }
+  
+  .index_1{
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .index_2{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  20px 20px 0px #87c0cc,
+                 -20px -20px 0px #b7ffff;
+  }
+  .index_3{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius:50px;
+    background: #9FE2F0;
+    box-shadow:  -20px 20px 0px #87c0cc,
+                 20px -20px 0px #b7ffff;
+  }
+  .index_4{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  20px 20px 0px #87c0cc,
+                 -20px -20px 0px #b7ffff;
+  }
+  .index_5{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  -20px 20px 0px #87c0cc,
+                 20px -20px 0px #b7ffff;
+  }
+  .index_6{
+    padding-top: 15%;
+    padding-bottom: 15%;
+  }
+  .index_7{
+    padding: 0%;
+    padding-top: 5%;
+    padding-bottom: 15%;
+    border-radius: 50px;
+    background: #9FE2F0;
+    box-shadow:  -20px 20px 0px #87c0cc,
+                 20px -20px 0px #b7ffff;
+  }
+  .big_index_1{
+    padding-top: 5%;
+  }
+  .big_index_2{
+    padding-top: 5%;
+  }
+  .big_index_3{
+    padding-top: 5%;
+  }
+  .big_index_4{
+    padding-top: 5%;
+  }
+
+  .air_1 {
+    position: relative;
+    box-shadow: inset 0 0 25px rgba (255, 255, 255, 0.25);
+    animation: animate_4010 8s ease-in-out infinite;
+  }
+  .air_1 :nth-child(2) {
+    position: relative;
+    zoom: 0.45;
+    left: -10px;
+    top: -100px;
+    animation : none
+  }
+  @keyframes animate_4010 {
+    0%,100% {
+      transform: translateY(-20px);
+    }
+  
+    50% {
+      transform: translateY(20px);
+    }
+  }
+  
+  .text-container {
+    padding-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .register{
+    padding-top: 10%;
+  }
+  .login{
+    padding-top: 10%;
+  }
+  .one{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text-container-2 h5{
+    font-size: 50px;
+  }
+
+  .diagram2{
+    padding-top: 10%;
+    text-align: center;
+  }
+  .diagram2 h2{
+    color: #536FAE;
+  }
+  .diagram{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .info{
+    padding-top: 10%;
+    text-align: center;
+  }
+  .my_table{
+    padding-top: 10%;
+  }
+  .log_in{
+    color: #E3857A;
+    font-size: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-container-2 h2{
+    margin: 0;
+    font-size: 100px;
+    color: rgba(225,225,225, .01);
+    background-image: url("oboi_17712_designed_for_living_bn_international.webp");
+    background-repeat: repeat;
+    -webkit-background-clip:text;
+    animation: animate 150s ease-in-out infinite;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+
+  .text-container-3{
+    padding-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-container-3 h5{
+    font-size: 50px;
+  }
+  .text-container h3{
+    margin: 0;
+    font-size: 70px;
+    color: rgba(225,225,225, .01);
+    background-image: url("oboi_17712_designed_for_living_bn_international.webp");
+    background-repeat: repeat;
+    -webkit-background-clip:text;
+    animation: animate 150s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  .text-container h1{
+    margin: 0;
+    font-size: 150px;
+    color: rgba(225,225,225, .01);
+    background-image: url("oboi_17712_designed_for_living_bn_international.webp");
+    background-repeat: repeat;
+    -webkit-background-clip:text;
+    animation: animate 150s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  .email{
+    margin-top: 5%;
+    background-color:#EACBD1;
+    padding: 20%;
+    border-radius: 10%;
+  }
+  .metrick{
+    margin-top: 5%;
+    background-color: #F1DBA7;
+    padding: 20%;
+    border-radius: 10%;
+  }
+  .text-container h4{
+    margin: 0;
+    font-size: 70px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .text-container-2 h6{
+    color: #536FAE;
+    margin: 0;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+  .text-container h2{
+    margin: 0;
+    font-size: 190px;
+    color: rgba(225,225,225, .01);
+    background-image: url("oboi_17712_designed_for_living_bn_international.webp");
+    background-repeat: repeat;
+    -webkit-background-clip:text;
+    animation: animate 150s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 200;
+  }
+  .br{
+    height: 500px;
+    background-color: #EACBD1;
+    color: #536FAE;
+  }
+  .br_2{
+    height: 500px;
+    background-color: #E3857A;
+    color: #F1DBA7;
+  }
+  .br_3{
+    height: 500px;
+    background-color :#536FAE;
+    color: #EACBD1;
+  }
+    @keyframes animate {
+      0%, 100% {
+        background-position: left top;
+      }
+      25%{
+        background-position: right bottom;
+       }
+      50% {
+        background-position: left bottom;
+      }
+      75% {
+        background-position: right top;
+      }   
+    }
